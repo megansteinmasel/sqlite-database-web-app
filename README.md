@@ -35,7 +35,7 @@ This will synchronize your private repository with the class repository.
 When you want to get an update from the public class repository you can run this command:
 
 ```
-$ git pull upstream main
+$ git pull upstream master
 ``` 
 
 ## Homeworks
