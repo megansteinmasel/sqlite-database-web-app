@@ -60,7 +60,7 @@ The web application will be an open-ended project, but must include the followin
 
 The project will be largely graded via automated tests.  The grading will be broken down along the following lines:
 
-* 74.9% - The automated test suite (if the test suite passes, you are guaranteed to get a C on the project)
+* 75% - The automated test suite (if the test suite passes, you are guaranteed to get a C on the project)
 * 15% - A recorded demo, demonstrating the following functionality
   * Navigating the core entities in the database
   * CRUD operations on the Employee entity
@@ -68,7 +68,6 @@ The project will be largely graded via automated tests.  The grading will be bro
   * Paging implemented in the Track main view 
   * A Group By based report page
 * 10% - Code quality and satisfaction of the Redis cache, determined by manual inspection
-* .1% - At least one use of htmx (https://htmx.org) in the application to add dynamic AJAX behavior
 
 ### Project Resources
 
