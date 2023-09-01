@@ -28,7 +28,7 @@ Next, you should add the class repository as an upstream git repo:
 $ cd csci-440-fall2023-private
 $ git remote add upstream https://github.com/msu/csci-440-fall2023.git
 $ git pull upstream master
-$ git push origin master
+$ git push origin
 ```
 This will synchronize your private repository with the class repository.
 
