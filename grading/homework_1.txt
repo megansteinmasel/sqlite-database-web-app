@@ -10,9 +10,7 @@
 [INFO] Copying 33 resources from src/main/resources to target/classes
 [INFO] 
 [INFO] --- compiler:3.1:compile (default-compile) @ CSCI_440_Project ---
-[INFO] Changes detected - recompiling the module!
-[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
-[INFO] Compiling 23 source files to /Users/carson/Projects/msu/csci-440-fall2023/grading/scripts/repos/megan_steinmasel/target/classes
+[INFO] Nothing to compile - all classes are up to date
 [INFO] 
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ CSCI_440_Project ---
 [WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
@@ -22,52 +20,24 @@
 [INFO] Changes detected - recompiling the module!
 [WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
 [INFO] Compiling 17 source files to /Users/carson/Projects/msu/csci-440-fall2023/grading/scripts/repos/megan_steinmasel/target/test-classes
-[INFO] 
-[INFO] --- surefire:2.22.1:test (default-test) @ CSCI_440_Project ---
-[INFO] 
-[INFO] -------------------------------------------------------
-[INFO]  T E S T S
-[INFO] -------------------------------------------------------
-[INFO] Running edu.montana.csci.csci440.homework.Homework1
-Resetting DB After Test...
-Resetting DB After Test...
-Resetting DB After Test...
-[ERROR] Tests run: 3, Failures: 2, Errors: 1, Skipped: 0, Time elapsed: 0.189 s <<< FAILURE! - in edu.montana.csci.csci440.homework.Homework1
-[ERROR] selectArtistsWhoseNameHasAnAInIt  Time elapsed: 0.177 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <211> but was: <275>
-	at edu.montana.csci.csci440.homework.Homework1.selectArtistsWhoseNameHasAnAInIt(Homework1.java:18)
-
-[ERROR] selectTheTrackAndAlbumAndArtistForAllTracksLongerThanSixMinutes  Time elapsed: 0.003 s  <<< ERROR!
-java.lang.RuntimeException: org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (no such column: albums.Title)
-	at edu.montana.csci.csci440.homework.Homework1.selectTheTrackAndAlbumAndArtistForAllTracksLongerThanSixMinutes(Homework1.java:39)
-Caused by: org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (no such column: albums.Title)
-	at edu.montana.csci.csci440.homework.Homework1.selectTheTrackAndAlbumAndArtistForAllTracksLongerThanSixMinutes(Homework1.java:39)
-
-[ERROR] selectAllArtistsWithMoreThanOneAlbum  Time elapsed: 0.003 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <56> but was: <275>
-	at edu.montana.csci.csci440.homework.Homework1.selectAllArtistsWithMoreThanOneAlbum(Homework1.java:29)
-
-[INFO] 
-[INFO] Results:
-[INFO] 
-[ERROR] Failures: 
-[ERROR]   Homework1.selectAllArtistsWithMoreThanOneAlbum:29 expected: <56> but was: <275>
-[ERROR]   Homework1.selectArtistsWhoseNameHasAnAInIt:18 expected: <211> but was: <275>
-[ERROR] Errors: 
-[ERROR]   Homework1.selectTheTrackAndAlbumAndArtistForAllTracksLongerThanSixMinutes:39->DBTest.executeSQL:58 » Runtime
-[INFO] 
-[ERROR] Tests run: 3, Failures: 2, Errors: 1, Skipped: 0
-[INFO] 
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /Users/carson/Projects/msu/csci-440-fall2023/grading/scripts/repos/megan_steinmasel/src/test/java/edu/montana/csci/csci440/homework/Homework1.java:[17,96] ')' or ',' expected
+[ERROR] /Users/carson/Projects/msu/csci-440-fall2023/grading/scripts/repos/megan_steinmasel/src/test/java/edu/montana/csci/csci440/homework/Homework1.java:[17,97] not a statement
+[ERROR] /Users/carson/Projects/msu/csci-440-fall2023/grading/scripts/repos/megan_steinmasel/src/test/java/edu/montana/csci/csci440/homework/Homework1.java:[17,101] ';' expected
+[INFO] 3 errors 
+[INFO] -------------------------------------------------------------
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  2.237 s
-[INFO] Finished at: 2023-09-29T09:22:17-06:00
+[INFO] Total time:  0.740 s
+[INFO] Finished at: 2023-10-01T16:05:14-06:00
 [INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.22.1:test (default-test) on project CSCI_440_Project: There are test failures.
-[ERROR] 
-[ERROR] Please refer to /Users/carson/Projects/msu/csci-440-fall2023/grading/scripts/repos/megan_steinmasel/target/surefire-reports for the individual test results.
-[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:testCompile (default-testCompile) on project CSCI_440_Project: Compilation failure: Compilation failure: 
+[ERROR] /Users/carson/Projects/msu/csci-440-fall2023/grading/scripts/repos/megan_steinmasel/src/test/java/edu/montana/csci/csci440/homework/Homework1.java:[17,96] ')' or ',' expected
+[ERROR] /Users/carson/Projects/msu/csci-440-fall2023/grading/scripts/repos/megan_steinmasel/src/test/java/edu/montana/csci/csci440/homework/Homework1.java:[17,97] not a statement
+[ERROR] /Users/carson/Projects/msu/csci-440-fall2023/grading/scripts/repos/megan_steinmasel/src/test/java/edu/montana/csci/csci440/homework/Homework1.java:[17,101] ';' expected
 [ERROR] -> [Help 1]
 [ERROR] 
 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
