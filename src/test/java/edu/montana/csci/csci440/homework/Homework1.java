@@ -14,7 +14,7 @@ public class Homework1 extends DBTest {
      * Write a query in the string below that returns all artists that have an 'A' in their name
      */
     void selectArtistsWhoseNameHasAnAInIt(){
-        List<Map<String, Object>> results = executeSQL("select name from artists where name like "A%";");
+        List<Map<String, Object>> results = executeSQL("select * from artists where name like '%A%';");
         assertEquals(211, results.size());
     }
 
@@ -35,8 +35,12 @@ public class Homework1 extends DBTest {
          * album and artist name
          */
     void selectTheTrackAndAlbumAndArtistForAllTracksLongerThanSixMinutes() {
-        List<Map<String, Object>> results = executeSQL("select t.trackid, al.title, ar.name from tracks t " +
-                        "inner join albums al on t.albumid = al.albumid inner join artists ar on al.artistid = ar.artistid where t.milliseconds/6000 > 6;");
+        List<Map<String, Object>> results = executeSQL("select al.title, ar.name from tracks t " +
+                "inner join albums al " +
+                "on t.albumid = al.albumid " +
+                "inner join artists ar " +
+                "on al.artistid = ar.artistid " +
+                "where t.milliseconds > 1000 * 60 * 6;");
 
         assertEquals(623, results.size());
     }
