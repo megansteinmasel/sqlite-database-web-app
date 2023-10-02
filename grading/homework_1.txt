@@ -20,28 +20,25 @@
 [INFO] Changes detected - recompiling the module!
 [WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
 [INFO] Compiling 17 source files to /Users/carson/Projects/msu/csci-440-fall2023/grading/scripts/repos/megan_steinmasel/target/test-classes
-[INFO] -------------------------------------------------------------
-[ERROR] COMPILATION ERROR : 
-[INFO] -------------------------------------------------------------
-[ERROR] /Users/carson/Projects/msu/csci-440-fall2023/grading/scripts/repos/megan_steinmasel/src/test/java/edu/montana/csci/csci440/homework/Homework1.java:[17,96] ')' or ',' expected
-[ERROR] /Users/carson/Projects/msu/csci-440-fall2023/grading/scripts/repos/megan_steinmasel/src/test/java/edu/montana/csci/csci440/homework/Homework1.java:[17,97] not a statement
-[ERROR] /Users/carson/Projects/msu/csci-440-fall2023/grading/scripts/repos/megan_steinmasel/src/test/java/edu/montana/csci/csci440/homework/Homework1.java:[17,101] ';' expected
-[INFO] 3 errors 
-[INFO] -------------------------------------------------------------
+[INFO] 
+[INFO] --- surefire:2.22.1:test (default-test) @ CSCI_440_Project ---
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running edu.montana.csci.csci440.homework.Homework1
+Resetting DB After Test...
+Resetting DB After Test...
+Resetting DB After Test...
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.231 s - in edu.montana.csci.csci440.homework.Homework1
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
 [INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
+[INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  0.740 s
-[INFO] Finished at: 2023-10-01T16:05:14-06:00
+[INFO] Total time:  2.377 s
+[INFO] Finished at: 2023-10-02T15:30:24-06:00
 [INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:testCompile (default-testCompile) on project CSCI_440_Project: Compilation failure: Compilation failure: 
-[ERROR] /Users/carson/Projects/msu/csci-440-fall2023/grading/scripts/repos/megan_steinmasel/src/test/java/edu/montana/csci/csci440/homework/Homework1.java:[17,96] ')' or ',' expected
-[ERROR] /Users/carson/Projects/msu/csci-440-fall2023/grading/scripts/repos/megan_steinmasel/src/test/java/edu/montana/csci/csci440/homework/Homework1.java:[17,97] not a statement
-[ERROR] /Users/carson/Projects/msu/csci-440-fall2023/grading/scripts/repos/megan_steinmasel/src/test/java/edu/montana/csci/csci440/homework/Homework1.java:[17,101] ';' expected
-[ERROR] -> [Help 1]
-[ERROR] 
-[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR] 
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
