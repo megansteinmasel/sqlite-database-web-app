@@ -6,10 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Artist extends Model {
 
@@ -49,7 +46,22 @@ public class Artist extends Model {
     }
 
     public static List<Artist> all(int page, int count) {
-        return Collections.emptyList();
+        try {
+            try (Connection connect = DB.connect();
+                 PreparedStatement stmt = connect.prepareStatement("select * from artists limit ?")) {
+                ArrayList<Artist> result = new ArrayList();
+                stmt.setInt(1, count);
+                ResultSet resultSet = stmt.executeQuery();
+                while (resultSet.next()) {
+                    result.add(new Artist(resultSet));
+                }
+                return result;
+            }
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+
+        //return Collections.emptyList();
     }
 
     public static Artist find(long i) {

@@ -10,10 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Track extends Model {
 
@@ -152,11 +149,49 @@ public class Track extends Model {
     public static List<Track> advancedSearch(int page, int count,
                                              String search, Integer artistId, Integer albumId,
                                              Integer maxRuntime, Integer minRuntime) {
-        return Collections.emptyList();
+
+        try {
+            try (Connection connect = DB.connect();
+                 PreparedStatement stmt = connect.prepareStatement("select *" +
+                         " from tracks" +
+                         " and milliseconds <= ?" +
+                         " where name like ?" +
+                         " limit ?")) {
+                ArrayList<Track> result = new ArrayList();
+                stmt.setString(1, "%" + search + "%");
+                stmt.setInt(2, maxRuntime * 1000);
+                stmt.setInt(3, count);
+                ResultSet resultSet = stmt.executeQuery();
+                while (resultSet.next()) {
+                    result.add(new Track(resultSet));
+                }
+                return result;
+            }
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+
+        //return Collections.emptyList();
     }
 
     public static List<Track> search(int page, int count, String orderBy, String search) {
-        return Collections.emptyList();
+        try {
+            try (Connection connect = DB.connect();
+                 PreparedStatement stmt = connect.prepareStatement("select * from tracks where name like ? limit ?")) {
+                ArrayList<Track> result = new ArrayList();
+                stmt.setString(1, "%" + search + "%");
+                stmt.setInt(2, count);
+                ResultSet resultSet = stmt.executeQuery();
+                while (resultSet.next()) {
+                    result.add(new Track(resultSet));
+                }
+                return result;
+            }
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+
+        //return Collections.emptyList();
     }
 
     public static List<Track> forAlbum(Long albumId) {

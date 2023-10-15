@@ -4,6 +4,7 @@ import edu.montana.csci.csci440.util.DB;
 
 import java.math.BigDecimal;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -138,7 +139,22 @@ public class Employee extends Model {
     }
 
     public static List<Employee> all(int page, int count) {
-        return Collections.emptyList();
+        try {
+            try (Connection connect = DB.connect();
+                 PreparedStatement stmt = connect.prepareStatement("select * from employees limit ?")) {
+                ArrayList<Employee> result = new ArrayList();
+                stmt.setInt(1, count);
+                ResultSet resultSet = stmt.executeQuery();
+                while (resultSet.next()) {
+                    result.add(new Employee(resultSet));
+                }
+                return result;
+            }
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+
+        // return Collections.emptyList();
     }
 
     public static Employee findByEmail(String newEmailAddress) {
@@ -155,6 +171,7 @@ public class Employee extends Model {
 
     public void setReportsTo(Employee employee) {
         // TODO implement
+        //reportsTo = something
     }
 
     public static class SalesSummary {
