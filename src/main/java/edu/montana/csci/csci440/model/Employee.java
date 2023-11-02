@@ -42,9 +42,12 @@ public class Employee extends Model {
         if (firstName == null || "".equals(firstName)) {
             addError("FirstName can't be null or blank!");
         }
-        // TODO - add in additional validations:
-        //   last name can't be null or blank
-        //   email can't be null or blank and must contain an @
+        if (lastName == null || "".equals(lastName)) {
+            addError("LastName can't be null or blank!");
+        }
+        if (email == null || "".equals(email) || !email.contains("@")) {
+            addError("Email can't be null or blank and must contian an '@' symbol!");
+        }
         return !hasErrors();
     }
 
@@ -68,17 +71,19 @@ public class Employee extends Model {
         }
     }
 
-    @Override
+    @Override // not working
     public boolean create() {
         if (verify()) {
             try (Connection conn = DB.connect();
                  PreparedStatement stmt = conn.prepareStatement(
-                         "INSERT INTO employees (FirstName, LastName, Email) VALUES (?, ?, ?)")) {
-                stmt.setString(1, this.getFirstName());
-                stmt.setString(2, this.getLastName());
-                stmt.setString(3, this.getEmail());
+                         "INSERT INTO employees (LastName, FirstName, Title, ReportsTo, Email) VALUES (?, ?, ?, ?, ?)")) {
+                stmt.setString(1, this.getLastName());
+                stmt.setString(2, this.getFirstName());
+                stmt.setString(3, this.getTitle());
+                stmt.setLong(4, this.getReportsTo());
+                stmt.setString(5, this.getEmail());
                 stmt.executeUpdate();
-                employeeId = DB.getLastID(conn);
+                this.employeeId = DB.getLastID(conn);
                 return true;
             } catch (SQLException sqlException) {
                 throw new RuntimeException(sqlException);
@@ -90,16 +95,31 @@ public class Employee extends Model {
 
     @Override
     public void delete() {
+        if (verify()) {
+            try (Connection conn = DB.connect();
+                 PreparedStatement stmt = conn.prepareStatement(
+                         "DELETE FROM Employees WHERE EmployeeId=?;")) {
+                stmt.setLong(1, this.getEmployeeId());
+                stmt.executeUpdate();
+                return;
+            } catch (SQLException sqlException) {
+                throw new RuntimeException(sqlException);
+            }
+        } else {
+            return;
+        }
     }
 
     public String getFirstName() {
         return firstName;
     }
+
     public void setFirstName(String firstName) { this.firstName = firstName; }
 
     public String getLastName() {
         return lastName;
     }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -107,6 +127,7 @@ public class Employee extends Model {
     public String getEmail() {
         return email;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -127,23 +148,13 @@ public class Employee extends Model {
         this.reportsTo = reportsTo;
     }
 
+    // i dont know if i need all this
     public List<Employee> getReports() {
-        return Collections.emptyList();
-    }
-    public Employee getBoss() {
-        return null;
-    }
-
-    public static List<Employee> all() {
-        return all(0, Integer.MAX_VALUE);
-    }
-
-    public static List<Employee> all(int page, int count) {
         try {
             try (Connection connect = DB.connect();
-                 PreparedStatement stmt = connect.prepareStatement("select * from employees limit ?")) {
+                 PreparedStatement stmt = connect.prepareStatement("SELECT ReportsTo FROM employees WHERE EmployeeId =?;")) {
                 ArrayList<Employee> result = new ArrayList();
-                stmt.setInt(1, count);
+                stmt.setLong(1, this.getEmployeeId());
                 ResultSet resultSet = stmt.executeQuery();
                 while (resultSet.next()) {
                     result.add(new Employee(resultSet));
@@ -153,25 +164,84 @@ public class Employee extends Model {
         }catch (SQLException e){
             throw new RuntimeException(e);
         }
-
-        // return Collections.emptyList();
+        //return Collections.emptyList();
     }
 
+    public Employee getBoss() {
+        return null;
+    }
+
+    public static List<Employee> all() {
+        return all(0, Integer.MAX_VALUE);
+    }
+
+    public static List<Employee> all(int page, int count) {
+        int offset = (page-1)*count;
+        try {
+            try (Connection connect = DB.connect();
+                 PreparedStatement stmt = connect.prepareStatement("SELECT * FROM employees LIMIT ? OFFSET ?")) {
+                ArrayList<Employee> result = new ArrayList();
+                stmt.setInt(1, count);
+                stmt.setInt(2, offset);
+                ResultSet resultSet = stmt.executeQuery();
+                while (resultSet.next()) {
+                    result.add(new Employee(resultSet));
+                }
+                return result;
+            }
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+
     public static Employee findByEmail(String newEmailAddress) {
-        throw new UnsupportedOperationException("Implement me");
+        try{
+            try (Connection conn = DB.connect();
+                 PreparedStatement stmt = conn.prepareStatement(
+                         "SELECT * FROM employees WHERE Email = ?;")) {
+                stmt.setString(1, newEmailAddress);
+                ResultSet resultSet = stmt.executeQuery();
+                if(resultSet.next()){
+                    return new Employee(resultSet);
+                }else{
+                    return null;
+                }
+            }
+        }catch(SQLException e) {
+            throw new RuntimeException(e);
+        }
+       // throw new UnsupportedOperationException("Implement me");
     }
 
     public static Employee find(long employeeId) {
-        return new Employee();
+        try{
+            try (Connection conn = DB.connect();
+                 PreparedStatement stmt = conn.prepareStatement(
+                         "SELECT * FROM employees WHERE EmployeeId = ?")) {
+                stmt.setLong(1, employeeId);
+                ResultSet resultSet = stmt.executeQuery();
+                if(resultSet.next()){
+                    return new Employee(resultSet);
+                }else{
+                    return null;
+                }
+            }
+        }catch(SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
+    public String getTitle() {
+        return title;
+    }
     public void setTitle(String programmer) {
         title = programmer;
     }
 
     public void setReportsTo(Employee employee) {
         // TODO implement
-        //reportsTo = something
+        reportsTo = employee.getReportsTo();
     }
 
     public static class SalesSummary {

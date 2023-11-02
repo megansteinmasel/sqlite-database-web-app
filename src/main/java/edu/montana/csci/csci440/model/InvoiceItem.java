@@ -1,6 +1,7 @@
 package edu.montana.csci.csci440.model;
 
 import java.math.BigDecimal;
+import java.sql.ResultSet;
 
 public class InvoiceItem extends Model {
 
@@ -9,6 +10,11 @@ public class InvoiceItem extends Model {
     Long trackId;
     BigDecimal unitPrice;
     Long quantity;
+
+    // i added this
+    public InvoiceItem(ResultSet resultSet) {
+        super();
+    }
 
     public Track getTrack() {
         return null;
