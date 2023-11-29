@@ -10,14 +10,20 @@
 [INFO] Copying 33 resources from src/main/resources to target/classes
 [INFO] 
 [INFO] --- compiler:3.1:compile (default-compile) @ CSCI_440_Project ---
-[INFO] Nothing to compile - all classes are up to date
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 23 source files to /Users/carson/Projects/msu/csci-440-fall2023/grading/scripts/repos/megan_steinmasel/target/classes
+[WARNING] /Users/carson/Projects/msu/csci-440-fall2023/grading/scripts/repos/megan_steinmasel/src/main/java/edu/montana/csci/csci440/model/Employee.java: Some input files use unchecked or unsafe operations.
+[WARNING] /Users/carson/Projects/msu/csci-440-fall2023/grading/scripts/repos/megan_steinmasel/src/main/java/edu/montana/csci/csci440/model/Employee.java: Recompile with -Xlint:unchecked for details.
 [INFO] 
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ CSCI_440_Project ---
 [WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
 [INFO] Copying 3 resources from src/test/resources to target/test-classes
 [INFO] 
 [INFO] --- compiler:3.1:testCompile (default-testCompile) @ CSCI_440_Project ---
-[INFO] Nothing to compile - all classes are up to date
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 17 source files to /Users/carson/Projects/msu/csci-440-fall2023/grading/scripts/repos/megan_steinmasel/target/test-classes
 [INFO] 
 [INFO] --- surefire:2.22.1:test (default-test) @ CSCI_440_Project ---
 [INFO] 
@@ -28,11 +34,7 @@
 Resetting DB After Test...
 Resetting DB After Test...
 Resetting DB After Test...
-[ERROR] Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.391 s <<< FAILURE! - in edu.montana.csci.csci440.model.InvoicesTest
-[ERROR] testInvoiceFieldsLoad  Time elapsed: 0.372 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <Stuttgart> but was: <null>
-	at edu.montana.csci.csci440.model.InvoicesTest.testInvoiceFieldsLoad(InvoicesTest.java:22)
-
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.264 s - in edu.montana.csci.csci440.model.InvoicesTest
 [INFO] Running edu.montana.csci.csci440.model.TrackTest
 Resetting DB After Test...
 Resetting DB After Test...
@@ -46,47 +48,23 @@ Resetting DB After Test...
 Resetting DB After Test...
 Resetting DB After Test...
 Resetting DB After Test...
-[ERROR] Tests run: 12, Failures: 4, Errors: 1, Skipped: 0, Time elapsed: 0.066 s <<< FAILURE! - in edu.montana.csci.csci440.model.TrackTest
-[ERROR] testAlbumNameIsStoredOnTrack  Time elapsed: 0 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <10> but was: <11>
-	at edu.montana.csci.csci440.model.TrackTest.testAlbumNameIsStoredOnTrack(TrackTest.java:96)
-
-[ERROR] testTrackListsWorks  Time elapsed: 0.003 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <3> but was: <0>
-	at edu.montana.csci.csci440.model.TrackTest.testTrackListsWorks(TrackTest.java:108)
-
-[ERROR] advancedSearchTest  Time elapsed: 0.003 s  <<< ERROR!
-java.lang.RuntimeException: org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "and": syntax error)
-	at edu.montana.csci.csci440.model.TrackTest.advancedSearchTest(TrackTest.java:135)
-Caused by: org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "and": syntax error)
-	at edu.montana.csci.csci440.model.TrackTest.advancedSearchTest(TrackTest.java:135)
-
+[ERROR] Tests run: 12, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.125 s <<< FAILURE! - in edu.montana.csci.csci440.model.TrackTest
 [ERROR] trackCountIsCachedInRedis  Time elapsed: 0.005 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <28> but was: <27>
-	at edu.montana.csci.csci440.model.TrackTest.trackCountIsCachedInRedis(TrackTest.java:116)
-
-[ERROR] testArtistNameIsStoredOnTrack  Time elapsed: 0.004 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <33> but was: <35>
-	at edu.montana.csci.csci440.model.TrackTest.testArtistNameIsStoredOnTrack(TrackTest.java:87)
+org.opentest4j.AssertionFailedError: expected: <32> but was: <31>
+	at edu.montana.csci.csci440.model.TrackTest.trackCountIsCachedInRedis(TrackTest.java:117)
 
 [INFO] Running edu.montana.csci.csci440.model.PlaylistsTest
 Resetting DB After Test...
 Resetting DB After Test...
 Resetting DB After Test...
-[ERROR] Tests run: 3, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.004 s <<< FAILURE! - in edu.montana.csci.csci440.model.PlaylistsTest
-[ERROR] testPlaylistFieldsLoad  Time elapsed: 0.002 s  <<< ERROR!
-java.lang.RuntimeException: java.sql.SQLException: no such column: 'Milliseconds'
-	at edu.montana.csci.csci440.model.PlaylistsTest.testPlaylistFieldsLoad(PlaylistsTest.java:22)
-Caused by: java.sql.SQLException: no such column: 'Milliseconds'
-	at edu.montana.csci.csci440.model.PlaylistsTest.testPlaylistFieldsLoad(PlaylistsTest.java:22)
-
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s - in edu.montana.csci.csci440.model.PlaylistsTest
 [INFO] Running edu.montana.csci.csci440.model.AlbumTest
 Resetting DB After Test...
 Resetting DB After Test...
 Resetting DB After Test...
 Resetting DB After Test...
 Resetting DB After Test...
-[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 s - in edu.montana.csci.csci440.model.AlbumTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.017 s - in edu.montana.csci.csci440.model.AlbumTest
 [INFO] Running edu.montana.csci.csci440.model.EmployeeTest
 Resetting DB After Test...
 Resetting DB After Test...
@@ -95,23 +73,7 @@ Resetting DB After Test...
 Resetting DB After Test...
 Resetting DB After Test...
 Resetting DB After Test...
-[ERROR] Tests run: 7, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.031 s <<< FAILURE! - in edu.montana.csci.csci440.model.EmployeeTest
-[ERROR] testCreateWorks  Time elapsed: 0.002 s  <<< ERROR!
-java.lang.RuntimeException: org.sqlite.SQLiteException: [SQLITE_CONSTRAINT_FOREIGNKEY]  A foreign key constraint failed (FOREIGN KEY constraint failed)
-	at edu.montana.csci.csci440.model.EmployeeTest.testCreateWorks(EmployeeTest.java:43)
-Caused by: org.sqlite.SQLiteException: [SQLITE_CONSTRAINT_FOREIGNKEY]  A foreign key constraint failed (FOREIGN KEY constraint failed)
-	at edu.montana.csci.csci440.model.EmployeeTest.testCreateWorks(EmployeeTest.java:43)
-
-[ERROR] testEmployeeHelperOnlyIssuesOneQuery  Time elapsed: 0.007 s  <<< ERROR!
-java.lang.RuntimeException: java.sql.SQLException: no such column: 'FirstName'
-	at edu.montana.csci.csci440.model.EmployeeTest.testEmployeeHelperOnlyIssuesOneQuery(EmployeeTest.java:86)
-Caused by: java.sql.SQLException: no such column: 'FirstName'
-	at edu.montana.csci.csci440.model.EmployeeTest.testEmployeeHelperOnlyIssuesOneQuery(EmployeeTest.java:86)
-
-[ERROR] testEmployeeSalesReport  Time elapsed: 0.002 s  <<< ERROR!
-java.lang.IndexOutOfBoundsException: Index: 0
-	at edu.montana.csci.csci440.model.EmployeeTest.testEmployeeSalesReport(EmployeeTest.java:94)
-
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.048 s - in edu.montana.csci.csci440.model.EmployeeTest
 [INFO] Running edu.montana.csci.csci440.model.ArtistTest
 Resetting DB After Test...
 Resetting DB After Test...
@@ -119,40 +81,25 @@ Resetting DB After Test...
 Resetting DB After Test...
 Resetting DB After Test...
 Resetting DB After Test...
-[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s - in edu.montana.csci.csci440.model.ArtistTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.028 s - in edu.montana.csci.csci440.model.ArtistTest
 [INFO] Running edu.montana.csci.csci440.model.CustomerTest
 Resetting DB After Test...
 Resetting DB After Test...
 Resetting DB After Test...
-[ERROR] Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.005 s <<< FAILURE! - in edu.montana.csci.csci440.model.CustomerTest
-[ERROR] testCustomerFieldsLoad  Time elapsed: 0.001 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <luisg@embraer.com.br> but was: <null>
-	at edu.montana.csci.csci440.model.CustomerTest.testCustomerFieldsLoad(CustomerTest.java:21)
-
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s - in edu.montana.csci.csci440.model.CustomerTest
 [INFO] 
 [INFO] Results:
 [INFO] 
 [ERROR] Failures: 
-[ERROR]   CustomerTest.testCustomerFieldsLoad:21 expected: <luisg@embraer.com.br> but was: <null>
-[ERROR]   InvoicesTest.testInvoiceFieldsLoad:22 expected: <Stuttgart> but was: <null>
-[ERROR]   TrackTest.testAlbumNameIsStoredOnTrack:96 expected: <10> but was: <11>
-[ERROR]   TrackTest.testArtistNameIsStoredOnTrack:87 expected: <33> but was: <35>
-[ERROR]   TrackTest.testTrackListsWorks:108 expected: <3> but was: <0>
-[ERROR]   TrackTest.trackCountIsCachedInRedis:116 expected: <28> but was: <27>
-[ERROR] Errors: 
-[ERROR]   EmployeeTest.testCreateWorks:43 » Runtime org.sqlite.SQLiteException: [SQLITE_...
-[ERROR]   EmployeeTest.testEmployeeHelperOnlyIssuesOneQuery:86 » Runtime java.sql.SQLExc...
-[ERROR]   EmployeeTest.testEmployeeSalesReport:94 » IndexOutOfBounds Index: 0
-[ERROR]   PlaylistsTest.testPlaylistFieldsLoad:22 » Runtime java.sql.SQLException: no su...
-[ERROR]   TrackTest.advancedSearchTest:135 » Runtime org.sqlite.SQLiteException: [SQLITE...
+[ERROR]   TrackTest.trackCountIsCachedInRedis:117 expected: <32> but was: <31>
 [INFO] 
-[ERROR] Tests run: 39, Failures: 6, Errors: 5, Skipped: 0
+[ERROR] Tests run: 39, Failures: 1, Errors: 0, Skipped: 0
 [INFO] 
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  1.724 s
-[INFO] Finished at: 2023-11-29T12:12:22-07:00
+[INFO] Total time:  2.728 s
+[INFO] Finished at: 2023-11-29T16:43:20-07:00
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.22.1:test (default-test) on project CSCI_440_Project: There are test failures.
 [ERROR] 
