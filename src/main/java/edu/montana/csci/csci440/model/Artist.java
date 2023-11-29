@@ -26,6 +26,23 @@ public class Artist extends Model {
     }
 
     @Override
+    public void delete() {
+        if (verify()) {
+            try (Connection conn = DB.connect();
+                 PreparedStatement stmt = conn.prepareStatement(
+                         "DELETE FROM artists WHERE ArtistId=?;")) {
+                stmt.setLong(1, this.getArtistId());
+                stmt.execute();
+                return;
+            } catch (SQLException sqlException) {
+                throw new RuntimeException(sqlException);
+            }
+        } else {
+            return;
+        }
+    }
+
+    @Override
     public boolean verify() {
         _errors.clear(); // clear any existing errors
         if (name == null || "".equals(name)) {
@@ -59,7 +76,6 @@ public class Artist extends Model {
             try (Connection conn = DB.connect();
                  PreparedStatement stmt = conn.prepareStatement(
                          "UPDATE artists SET Name=? WHERE ArtistId=? AND Name=?")) {
-
                 String newName = this.getName();
                 stmt.setString(1, newName);
                 stmt.setLong(2, artistId);

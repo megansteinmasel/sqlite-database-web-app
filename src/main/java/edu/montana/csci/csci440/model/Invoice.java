@@ -29,16 +29,16 @@ public class Invoice extends Model {
         billingPostalCode = results.getString("BillingPostalCode");
         total = results.getBigDecimal("Total");
         invoiceId = results.getLong("InvoiceId");
+        billingCity = results.getString("BillingCity");
     }
 
     public List<InvoiceItem> getInvoiceItems(){
-        //TODO implement
         try {
             try (Connection connect = DB.connect();
                  PreparedStatement stmt = connect.prepareStatement("SELECT BillingAddress, BillingCity FROM Invoices" +
                          " JOIN Invoice_Items" +
-                         " ON Invoices.InvoiceId = Invoice_Items.InvoiceId" +
-                         " WHERE Invoices.InvoiceId =?;")) {
+                         " ON invoices.InvoiceId = invoice_items.InvoiceLineId" +
+                         " WHERE invoices.InvoiceId =?;")) {
                 stmt.setLong(1, this.getInvoiceId());
                 ArrayList<InvoiceItem> result = new ArrayList();
                 ResultSet resultSet = stmt.executeQuery();
@@ -50,8 +50,8 @@ public class Invoice extends Model {
         }catch (SQLException e){
             throw new RuntimeException(e);
         }
-
     }
+
     public Customer getCustomer() {
         return null;
     }
@@ -136,7 +136,10 @@ public class Invoice extends Model {
         try{
             try (Connection conn = DB.connect();
                  PreparedStatement stmt = conn.prepareStatement(
-                         "SELECT * FROM invoices WHERE InvoiceId = ?")) {
+                         "SELECT BillingAddress, BillingCity, BillingState, BillingCountry, BillingPostalCode, Total, invoices.InvoiceId FROM invoices" +
+                                 " JOIN Invoice_Items" +
+                                 " ON invoices.InvoiceId = invoice_items.InvoiceLineId" +
+                                 " WHERE invoices.InvoiceId =?;")) {
                 stmt.setLong(1, invoiceId);
                 ResultSet resultSet = stmt.executeQuery();
                 if(resultSet.next()){
@@ -148,6 +151,5 @@ public class Invoice extends Model {
         }catch(SQLException e) {
             throw new RuntimeException(e);
         }
-        //return new Invoice();
     }
 }

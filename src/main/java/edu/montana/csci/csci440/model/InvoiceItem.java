@@ -11,7 +11,6 @@ public class InvoiceItem extends Model {
     BigDecimal unitPrice;
     Long quantity;
 
-    // i added this
     public InvoiceItem(ResultSet resultSet) {
         super();
     }

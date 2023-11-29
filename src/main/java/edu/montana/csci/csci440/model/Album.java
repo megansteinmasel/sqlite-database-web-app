@@ -1,6 +1,7 @@
 package edu.montana.csci.csci440.model;
 
 import edu.montana.csci.csci440.util.DB;
+import redis.clients.jedis.Jedis;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -58,7 +59,6 @@ public class Album extends Model {
         return artistId;
     }
 
-    // video lecture
     @Override
     public boolean create(){
         if (verify()) {
@@ -75,6 +75,23 @@ public class Album extends Model {
             }
         } else {
             return false;
+        }
+    }
+
+    @Override
+    public void delete() {
+        if (verify()) {
+            try (Connection conn = DB.connect();
+                 PreparedStatement stmt = conn.prepareStatement(
+                         "DELETE FROM albums WHERE AlbumId=?;")) {
+                stmt.setLong(1, this.getAlbumId());
+                stmt.executeUpdate();
+                return;
+            } catch (SQLException sqlException) {
+                throw new RuntimeException(sqlException);
+            }
+        } else {
+            return;
         }
     }
 
@@ -148,12 +165,25 @@ public class Album extends Model {
         }catch(SQLException e) {
             throw new RuntimeException(e);
         }
-        //return new Album();
     }
 
     public static List<Album> getForArtist(Long artistId) {
-        // TODO implement
-        return Collections.emptyList();
+        try {
+            try (Connection connect = DB.connect();
+                 PreparedStatement stmt = connect.prepareStatement("SELECT * FROM albums" +
+                         " JOIN artists ON albums.ArtistId = artists.ArtistId" +
+                         " WHERE artists.ArtistId =?;")) {
+                stmt.setLong(1, artistId);
+                ArrayList<Album> result = new ArrayList();
+                ResultSet resultSet = stmt.executeQuery();
+                while (resultSet.next()) {
+                    result.add(new Album(resultSet));
+                }
+                return result;
+            }
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 
 }

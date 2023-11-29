@@ -24,6 +24,7 @@ public class Customer extends Model {
     }
 
     public List<Invoice> getInvoices(){
+
         return Collections.emptyList();
     }
 
@@ -34,6 +35,7 @@ public class Customer extends Model {
         lastName = results.getString("LastName");
         customerId = results.getLong("CustomerId");
         supportRepId = results.getLong("SupportRepId");
+        email = results.getString("Email");
     }
 
     public String getFirstName() {
@@ -77,11 +79,24 @@ public class Customer extends Model {
         }catch (SQLException e){
             throw new RuntimeException(e);
         }
-        //return Collections.emptyList();
     }
 
     public static Customer find(long customerId) {
-        return new Customer();
+        try{
+            try (Connection conn = DB.connect();
+                 PreparedStatement stmt = conn.prepareStatement(
+                         "SELECT * FROM customers WHERE CustomerId =?;")) {
+                stmt.setLong(1, customerId);
+                ResultSet resultSet = stmt.executeQuery();
+                if(resultSet.next()){
+                    return new Customer(resultSet);
+                }else{
+                    return null;
+                }
+            }
+        }catch(SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static List<Customer> forEmployee(long employeeId) {

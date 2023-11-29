@@ -22,5 +22,6 @@ public class CustomersController {
             return Web.renderTemplate("templates/customers/show.vm",
                     "customer", customer);
         });
+
     }
 }
