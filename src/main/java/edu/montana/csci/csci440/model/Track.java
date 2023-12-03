@@ -298,7 +298,7 @@ public class Track extends Model {
     public static List<Track> advancedSearch(int page, int count,
                                              String search, Integer artistId, Integer albumId, Integer maxRuntime, Integer minRuntime) {
 
-        /*
+
         LinkedList<Object> args = new LinkedList<>();
 
         String query = "SELECT tracks.*, albums.ArtistId, artists.Name AS ArtistName, albums.Title AS AlbumTitle " +
@@ -338,9 +338,9 @@ public class Track extends Model {
         } catch (SQLException sqlException) {
             throw new RuntimeException(sqlException);
         }
-        */
 
 
+        /*
 
         try{
             StringBuilder queryBuilder = new StringBuilder(
@@ -412,6 +412,8 @@ public class Track extends Model {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+         */
 
 
     }

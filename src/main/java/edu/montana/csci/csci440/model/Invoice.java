@@ -22,7 +22,7 @@ public class Invoice extends Model {
         // new employee for insert
     }
 
-    private Invoice(ResultSet results) throws SQLException {
+    Invoice(ResultSet results) throws SQLException {
         billingAddress = results.getString("BillingAddress");
         billingState = results.getString("BillingState");
         billingCountry = results.getString("BillingCountry");
@@ -35,10 +35,18 @@ public class Invoice extends Model {
     public List<InvoiceItem> getInvoiceItems(){
         try {
             try (Connection connect = DB.connect();
-                 PreparedStatement stmt = connect.prepareStatement("SELECT BillingAddress, BillingCity FROM Invoices" +
-                         " JOIN Invoice_Items" +
-                         " ON invoices.InvoiceId = invoice_items.InvoiceLineId" +
-                         " WHERE invoices.InvoiceId =?;")) {
+                 PreparedStatement stmt = connect.prepareStatement("SELECT tracks.Name as TrackName, tracks.TrackId as TrackId, " +
+                         "albums.Title as AlbumName, " +
+                         "artists.Name as ArtistName, " +
+                         "invoice_items.InvoiceLineId as InvoiceLineId, " +
+                         "invoice_items.UnitPrice as UnitPrice, " +
+                         "invoice_items.Quantity as Quantity " +
+                         "FROM Invoices " +
+                         "JOIN Invoice_Items ON invoices.InvoiceId = invoice_items.InvoiceLineId " +
+                         "JOIN tracks ON invoice_items.TrackId = tracks.TrackId " +
+                         "JOIN albums ON tracks.AlbumId = albums.AlbumId " +
+                         "JOIN artists ON albums.ArtistId = artists.ArtistId " +
+                         "WHERE invoices.InvoiceId = ?;")) {
                 stmt.setLong(1, this.getInvoiceId());
                 ArrayList<InvoiceItem> result = new ArrayList();
                 ResultSet resultSet = stmt.executeQuery();

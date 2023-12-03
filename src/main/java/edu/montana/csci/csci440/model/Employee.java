@@ -158,7 +158,27 @@ public class Employee extends Model {
     }
 
     public List<Customer> getCustomers() {
-        return Customer.forEmployee(employeeId);
+        try {
+            try (Connection connect = DB.connect();
+                 PreparedStatement stmt = connect.prepareStatement("SELECT customers.*, customers.firstName as FirstName, " +
+                         "customers.lastName as LastName, " +
+                         "customers.email as Email, " +
+                         "customers.customerId as CustomerId " +
+                         "FROM employees " +
+                         "JOIN customers ON employees.EmployeeId = customers.SupportRepId " +
+                         "WHERE employees.EmployeeId = ?;")) {
+                stmt.setLong(1, this.getEmployeeId());
+                ArrayList<Customer> result = new ArrayList();
+                ResultSet resultSet = stmt.executeQuery();
+                while (resultSet.next()) {
+                    result.add(new Customer(resultSet));
+                }
+                return result;
+            }
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+        //return Customer.forEmployee(employeeId);
     }
 
     public Long getReportsTo() {
@@ -173,7 +193,6 @@ public class Employee extends Model {
         try {
             try (Connection connect = DB.connect();
                  PreparedStatement stmt = connect.prepareStatement("SELECT * FROM employees WHERE ReportsTo =?;")) {
-                // SELECT ReportsTo FROM employees WHERE EmployeeId =?
                 stmt.setLong(1, this.getEmployeeId());
                 ArrayList<Employee> result = new ArrayList();
                 ResultSet resultSet = stmt.executeQuery();

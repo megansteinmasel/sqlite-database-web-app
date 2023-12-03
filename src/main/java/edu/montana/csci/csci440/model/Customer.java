@@ -24,13 +24,34 @@ public class Customer extends Model {
     }
 
     public List<Invoice> getInvoices(){
-
-        return Collections.emptyList();
+        try {
+            try (Connection connect = DB.connect();
+                 PreparedStatement stmt = connect.prepareStatement("SELECT invoices.invoiceId as InvoiceId," +
+                         "invoices.billingAddress as BillingAddress, " +
+                         "invoices.billingCity as BillingCity, " +
+                         "invoices.billingState as BillingState, " +
+                         "invoices.billingCountry as BillingCountry, " +
+                         "invoices.billingPostalCode as BillingPostalCode, " +
+                         "invoices.total as Total " +
+                         "FROM customers " +
+                         "JOIN invoices ON customers.CustomerId = invoices.InvoiceId " +
+                         "WHERE customers.CustomerId = ?;")) {
+                stmt.setLong(1, this.getCustomerId());
+                ArrayList<Invoice> result = new ArrayList();
+                ResultSet resultSet = stmt.executeQuery();
+                while (resultSet.next()) {
+                    result.add(new Invoice(resultSet));
+                }
+                return result;
+            }
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 
     public Customer(){
     }
-    private Customer(ResultSet results) throws SQLException {
+    Customer(ResultSet results) throws SQLException {
         firstName = results.getString("FirstName");
         lastName = results.getString("LastName");
         customerId = results.getLong("CustomerId");
@@ -38,16 +59,30 @@ public class Customer extends Model {
         email = results.getString("Email");
     }
 
+    //public Track getInvoice() {
+      //  return Invoice.find(invoiceId);
+    //}
+
     public String getFirstName() {
         return firstName;
     }
+
+    public void setFirstName(String firstName) { this.firstName = firstName; }
 
     public String getLastName() {
         return lastName;
     }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public String getEmail() {
         return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Long getCustomerId() {

@@ -45,8 +45,12 @@
         <th>TrackId</th>
         <th>UnitPrice</th>
         <th>Quantity</th>
+        <th>TrackName</th>
+        <th>ArtistName</th>
+        <th>AlbumName</th>
     </tr>
     </thead>
+
     <tbody>
         #foreach( $item in $invoice.InvoiceItems )
         <tr>
@@ -54,12 +58,13 @@
             <td>$!item.TrackId</td>
             <td>$!item.UnitPrice</td>
             <td>$!item.Quantity</td>
+            <td>$!item.TrackName</td>
+            <td>$!item.Track.ArtistName</td>
+            <td>$!item.Track.AlbumTitle</td>
         </tr>
         #end
-        $web.pagingWidget($invoice.InvoiceItems)
     </tbody>
 </table>
-
 
 
 #parse('templates/footer.vm')
