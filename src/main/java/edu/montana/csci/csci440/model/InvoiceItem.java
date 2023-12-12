@@ -30,7 +30,6 @@ public class InvoiceItem extends Model {
         trackName = resultSet.getString("TrackName");
         albumName = resultSet.getString("AlbumName");
         artistName = resultSet.getString("ArtistName");
-        //super();
     }
 
     public Track getTrack() {
