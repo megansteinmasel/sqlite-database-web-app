@@ -18,9 +18,7 @@ public class Invoice extends Model {
     String billingPostalCode;
     BigDecimal total;
 
-    public Invoice() {
-        // new employee for insert
-    }
+    public Invoice() {}
 
     Invoice(ResultSet results) throws SQLException {
         billingAddress = results.getString("BillingAddress");
