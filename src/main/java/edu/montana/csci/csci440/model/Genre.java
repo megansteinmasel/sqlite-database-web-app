@@ -33,9 +33,7 @@ public class Genre extends Model {
     }
 
     public static List<Genre> all() {
-
         return Collections.emptyList();
     }
-
 
 }
