@@ -59,10 +59,6 @@ public class Customer extends Model {
         email = results.getString("Email");
     }
 
-    //public Track getInvoice() {
-      //  return Invoice.find(invoiceId);
-    //}
-
     public String getFirstName() {
         return firstName;
     }
