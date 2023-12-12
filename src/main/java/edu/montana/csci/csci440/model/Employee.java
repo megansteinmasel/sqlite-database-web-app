@@ -178,7 +178,6 @@ public class Employee extends Model {
         }catch (SQLException e){
             throw new RuntimeException(e);
         }
-        //return Customer.forEmployee(employeeId);
     }
 
     public Long getReportsTo() {
