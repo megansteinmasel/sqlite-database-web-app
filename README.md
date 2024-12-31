@@ -12,7 +12,7 @@
 * View the video demo [here.](https://www.youtube.com/watch?v=o0HcA4t95WI&ab_channel=MeganSteinmasel)
 
 ## Directory
-* The majority of the development work was done in the following directory: sqlite-database-web-app/src/main/java/edu/montana/csci/csci440
+* The majority of the development work was done in the following directory: [sqlite-database-web-app/src/main/java/edu/montana/csci/csci440](https://github.com/megansteinmasel/sqlite-database-web-app/tree/master/src/main/java/edu/montana/csci/csci440)
 
 ## Project Resources
 * [Spark Java Docs](http://sparkjava.com/documentation)
