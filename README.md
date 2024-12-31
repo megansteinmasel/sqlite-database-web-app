@@ -8,6 +8,9 @@
 * Optimistic Concurrency: Handle concurrent data access by implementing optimistic concurrency control to prevent data conflicts.
 * Paging: Support paginated results to efficiently manage and display large datasets.
 
+## Demo
+* View the video demo [here.](https://www.youtube.com/watch?v=o0HcA4t95WI&ab_channel=MeganSteinmasel)
+
 ## Directory
 * The majority of the development work was done in the following directory: sqlite-database-web-app/src/main/java/edu/montana/csci/csci440
 
