@@ -8,6 +8,9 @@
 * Optimistic Concurrency: Handle concurrent data access by implementing optimistic concurrency control to prevent data conflicts.
 * Paging: Support paginated results to efficiently manage and display large datasets.
 
+## Directory
+* The majority of the development work was done in the following directory: sqlite-database-web-app/src/main/java/edu/montana/csci/csci440
+
 ## Project Resources
 * [Spark Java Docs](http://sparkjava.com/documentation)
 * [Velocity Templates Docs](https://velocity.apache.org/engine/2.2/user-guide.html#loops)
