@@ -158,28 +158,6 @@ public class Track extends Model {
 
     public static Long count() {
         return 0l;
-        /*
-        Jedis redisClient = new Jedis();
-
-        if(redisClient.exists(REDIS_CACHE_KEY)) {
-            return Long.parseLong(redisClient.get(REDIS_CACHE_KEY));
-        }
-
-        String query = "SELECT COUNT(*) as Count FROM tracks";
-
-        try (Connection conn = DB.connect(); PreparedStatement stmt = conn.prepareStatement(query)) {
-            ResultSet results = stmt.executeQuery();
-            if (results.next()) {
-                long c = results.getLong("Count");
-                redisClient.set(REDIS_CACHE_KEY, String.valueOf(results.getLong("Count")));
-                return c;
-            } else {
-                throw new IllegalStateException("Should find a count");
-            }
-        } catch (SQLException sqlException) {
-            throw new RuntimeException(sqlException);
-        }
-        */
     }
 
 
@@ -338,83 +316,6 @@ public class Track extends Model {
         } catch (SQLException sqlException) {
             throw new RuntimeException(sqlException);
         }
-
-
-        /*
-
-        try{
-            StringBuilder queryBuilder = new StringBuilder(
-                    "SELECT tracks.*,"+
-                            " artists.Name AS ArtistName, albums.Title AS AlbumTitle"+
-                            " FROM tracks" +
-                            " JOIN albums ON tracks.AlbumId = albums.AlbumId" +
-                            " JOIN artists ON albums.ArtistId = artists.ArtistId" +
-                            " WHERE 1 = 1");
-
-            if (artistId != null){
-                queryBuilder.append(" AND artists.ArtistId = ?");
-            }
-            if (albumId != null){
-                queryBuilder.append(" AND albums.AlbumId = ?");
-            }
-            if (maxRuntime != null){
-                queryBuilder.append(" AND Milliseconds <= ?");
-            }
-            if (minRuntime != null){
-                queryBuilder.append(" AND Milliseconds >= ?");
-            }
-
-            // search condition
-            if (!search.isEmpty()){
-                queryBuilder.append(" AND tracks.Name LIKE ?");
-            }
-            queryBuilder.append(" LIMIT ? OFFSET ?");
-
-            try(Connection conn = DB.connect();
-                PreparedStatement stmt = conn.prepareStatement(queryBuilder.toString())){
-
-                int parameterIndex = 1;
-
-                if (artistId != null){
-                    stmt.setInt(parameterIndex++, artistId);
-                }
-
-                if (albumId != null){
-                    stmt.setInt(parameterIndex++, albumId);
-                }
-
-                if (maxRuntime != null){
-                    stmt.setInt(parameterIndex++, maxRuntime);
-                }
-
-                if (minRuntime != null){
-                    stmt.setInt(parameterIndex++, minRuntime);
-                }
-
-                if(search == null){
-                    return Collections.emptyList();
-                }
-
-                if (!search.isEmpty()){
-                    stmt.setString(parameterIndex++, "%" + search + "%");
-                }
-
-                stmt.setInt(parameterIndex++, count);
-                stmt.setInt(parameterIndex, (page-1) * count);
-
-                ResultSet resultSet = stmt.executeQuery();
-                List<Track> tracks = new ArrayList<>();
-                while (resultSet.next()) {
-                    tracks.add(new Track(resultSet));
-                }
-                    return tracks;
-                }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-         */
-
 
     }
 
